@@ -17,7 +17,8 @@ env:
     - RABBIT_PORT=5672
 
 script:
-  - docker-compose up --build
+  - docker-compose up -d --build
+  - docker ps
 
 after_script:
   - docker-compose down

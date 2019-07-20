@@ -1,0 +1,27 @@
+language: php
+php:
+  - 7.1
+
+services:
+  - docker
+
+env:
+  global:
+    - DOCKER_DB=database
+    - DOCKER_RABBIT=rabbit
+    - POSTGRES_DB=test_db
+    - POSTGRES_USER=testuser
+    - POSTGRES_PASSWORD=testpassword
+    - POSTGRES_SCHEME=cinema
+    - RABBIT_USER=rabbitmq
+    - RABBIT_PASSWORD=rabbitmq
+    - RABBIT_GUI_PORT=15672
+    - RABBIT_PORT=5672
+
+script:
+  - phpunit res/code/src/
+  - docker-compose up -d --build
+  - docker ps
+
+after_script:
+  - docker-compose down

@@ -18,10 +18,10 @@ env:
   - RABBIT_PORT=5672
 script:
 - phpunit res/code/src/
-- docker-compose up -d --build
-- docker ps
-after_script:
-- docker-compose down
+#- docker-compose up -d --build
+#- docker ps
+#after_script:
+#- docker-compose down
 deploy:
   provider: heroku
   app: lenni-api-simple

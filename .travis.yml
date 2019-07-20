@@ -1,4 +1,6 @@
 language: php
+php:
+  - 7.1
 
 services:
   - docker
@@ -17,6 +19,7 @@ env:
     - RABBIT_PORT=5672
 
 script:
+  - phpunit res/code/src/
   - docker-compose up -d --build
   - docker ps
 

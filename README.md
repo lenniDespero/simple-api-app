@@ -1,10 +1,10 @@
 # Simple API with RabbitMq
 
-###Prepare
+### Prepare
 
 Clone or download project and edit env options in .env file.
 
-####Usage
+#### Usage
 Run containers by command:
 `$ docker-compose up --build`
 

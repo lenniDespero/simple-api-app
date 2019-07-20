@@ -25,3 +25,9 @@ script:
 
 after_script:
   - docker-compose down
+
+deploy:
+  provider: heroku
+  app: "lenni-api-simple"
+  api_key:
+    secure: "ZoNMQDvJkVHb8hKmEAGvZ/aVI7rJORZBLQoaqHRemE4MUAaOkHq/K8bnFhsC1n8/rWGS5Pu5ekOfR+F/KyeR0irlXyNlnD6MfORvIpHeRxU0PP1VOugqnexDdrdrEUP157nWZddwmvc8Q/HAOWWqMpkxgwrFDgfRrzGoHIZeI/GkVCpNsQUbA3hzEyuMpx5GYjPCEYERXLPiSdNSn8uTbt1SCl5lok5zLc1z9h7HYGbWYxTVdeVWcKHL/vTU/QZdvc6lxnH76xOfpsuK84ziFjLbHPjfD45DW9vmMmAc/Y94yB+5rsSMSpeuuS8JfwVV0ACUIoH4MRQK/69gGawtxBDV8G5+Cb6KCusvOH2iSFr/TEgIgVm/fiTCY6L6cHTnPc+fwUyU5K9RYDchfja7ZMh1vNOs2YH+PmbKGRSLeoz+PjQuw4P6MIDAw4NvAAc4A7kyvRaAWaYFOh9tonJOnSw1jXSI1S2ZxDVi301jF3RpTF6a9IPv4Ji56dIZ1BlIiW/H6DZkDHsNunz1hTjkCY9TKLIYMR3wCcfGbPiBsw9zeEzDLrkNTXhd0SWT5f4RWlwWXmUF0FL/N6HHe/DRx/ZcdkO1YCTWgFXSNMZ9E0WbwKGCts8AOLfzAlenot8qeIbnnt9DFbmaqRp+SOTJTkRUEP22qA1IJyLN2UK8NQc="

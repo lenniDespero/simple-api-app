@@ -1,0 +1,10 @@
+language: php
+
+services:
+  - docker
+
+script:
+  - docker-compose up --build
+
+after_script:
+  - docker-compose down

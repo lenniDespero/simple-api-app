@@ -1,4 +1,4 @@
-# Simple API with RabbitMq
+# Simple API with RabbitMq [![Build Status](https://travis-ci.com/lenniDespero/simple-api-app.svg?branch=master)](https://travis-ci.com/lenniDespero/simple-api-app)
 
 ### Prepare
 

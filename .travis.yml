@@ -22,3 +22,4 @@ script:
 - docker ps
 after_script:
 - docker-compose down
+#some build options here

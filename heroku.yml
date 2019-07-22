@@ -1,0 +1,91 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: ${DOCKER_DB}
+  config:
+    POSTGRES_USER: ${POSTGRES_USER:-postgres}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+build:
+  docker:
+    web: Dockerfile
+    worker: php/Dockerfile
+  config:
+    POSTGRES_USER: ${POSTGRES_USER}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    POSTGRES_HOST: ${DOCKER_DB}
+    POSTGRES_PORT: 5432
+    POSTGRES_DB: ${POSTGRES_DB}
+    POSTGRES_SCHEMA: ${POSTGRES_SCHEME}
+    RABBIT_HOST: ${DOCKER_RABBIT}
+    RABBIT_USER: ${RABBIT_USER}
+    RABBIT_PASSWORD: ${RABBIT_PASSWORD}
+    RABBIT_PORT: 5672
+#release:
+#  command:
+#    - ./deployment-tasks.sh
+#  image: worker
+#run:
+#  web: bundle exec puma -C config/puma.rb
+#  worker: python myworker.py
+#  asset-syncer:
+#    command:
+#      - python asset-syncer.py
+#    image: worker
+#
+#services:
+#  web:
+#    build: ./nginx
+#    container_name: nginx
+#    ports:
+#      - "8080:80"
+#    volumes:
+#      - ./res/code:/code
+#    networks:
+#      - code-network
+#  php:
+#    build: ./php
+#    container_name: php
+#    environment:
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+#      POSTGRES_HOST: ${DOCKER_DB}
+#      POSTGRES_PORT: 5432
+#      POSTGRES_DB: ${POSTGRES_DB}
+#      POSTGRES_SCHEMA: ${POSTGRES_SCHEME}
+#      RABBIT_HOST: ${DOCKER_RABBIT}
+#      RABBIT_USER: ${RABBIT_USER}
+#      RABBIT_PASSWORD: ${RABBIT_PASSWORD}
+#      RABBIT_PORT: 5672
+#    volumes:
+#      - ./res/code:/code
+#    networks:
+#      - code-network
+#    command: bash -c "cd /code && composer install && php-fpm"
+#  db:
+#    build: ./database
+#    container_name: ${DOCKER_DB}
+#    restart: always
+#    environment:
+#      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+#    volumes:
+#      - ./res/db:/docker-entrypoint-initdb.d:ro
+#    ports:
+#      - "5433:5432"
+#    networks:
+#      - code-network
+#  rabbit:
+#    build: ./rabbit
+#    container_name: ${DOCKER_RABBIT}
+#    environment:
+#      RABBITMQ_DEFAULT_USER: ${RABBIT_USER}
+#      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASSWORD}
+#      RABBITMQ_DEFAULT_VHOST: "/"
+#    ports:
+#      - "${RABBIT_GUI_PORT}:15672"
+#      - "${RABBIT_PORT}:5672"
+#    networks:
+#      - code-network
+#networks:
+#  code-network:
+#    driver: bridge

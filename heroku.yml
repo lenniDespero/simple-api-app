@@ -7,7 +7,6 @@ setup:
     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
 build:
   docker:
-    web: Dockerfile
     worker: php/Dockerfile
   config:
     POSTGRES_USER: ${POSTGRES_USER}

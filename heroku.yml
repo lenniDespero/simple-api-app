@@ -10,7 +10,7 @@ build:
     php: php/Dockerfile
     web: nginx/Dokerfile
     db: database/Dockerfile
-      as: ${DOCKER_DB}
+      as: POSTGRES
   config:
     POSTGRES_USER: ${POSTGRES_USER}
     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}

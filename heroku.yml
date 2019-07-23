@@ -8,7 +8,7 @@ setup:
 build:
   docker:
     php: php/Dockerfile
-    web: nginx/Dokerfile
+    web: nginx/Dockerfile
     rabbit: rabbit/Dockerfile
   config:
     POSTGRES_USER: ${POSTGRES_USER}

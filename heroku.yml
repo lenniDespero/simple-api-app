@@ -9,7 +9,8 @@ build:
   docker:
     php: php/Dockerfile
     web: nginx/Dokerfile
-      voolumes: res/code:/code
+    db: database/Dockerfile
+      as: ${DOCKER_DB}
   config:
     POSTGRES_USER: ${POSTGRES_USER}
     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}

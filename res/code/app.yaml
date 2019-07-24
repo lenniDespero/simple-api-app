@@ -1,6 +1,6 @@
 runtime: php72
 includes:
-  - env_variables.yaml
+  - secret.yaml
 runtime_config:
   document_root: .
   front_controller_file: index.php

@@ -10,7 +10,9 @@ script:
 - phpunit res/code
 - mv key_file res/code/key_file
 - mv secret.yaml res/code/secret.yaml
-- ./build.sh
+#- ./build.sh
+before_deploy:
+  - cd res/code
 deploy:
   provider: gae
   keyfile: key_file

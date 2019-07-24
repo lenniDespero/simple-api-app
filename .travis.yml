@@ -2,30 +2,18 @@ language: php
 php:
 - 7.1
 sudo: required
-#services:
-#- docker
-#env:
-#  global:
-#  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-#  - DOCKER_DB=database
-#  - DOCKER_RABBIT=rabbit
-#  - POSTGRES_DB=test_db
-#  - POSTGRES_USER=testuser
-#  - POSTGRES_PASSWORD=testpassword
-#  - POSTGRES_SCHEME=cinema
-#  - RABBIT_USER=rabbitmq
-#  - RABBIT_PASSWORD=rabbitmq
-#  - RABBIT_GUI_PORT=15672
-#  - RABBIT_PORT=5672
 before_install:
-- openssl aes-256-cbc -K $encrypted_19ac19315506_key -iv $encrypted_19ac19315506_iv
-  -in secret.yaml.enc -out secret.yaml -d
-- openssl aes-256-cbc -K $encrypted_19ac19315506_key -iv $encrypted_19ac19315506_iv
-  -in key_file.enc -out key_file -d
+  - openssl aes-256-cbc -K $encrypted_19ac19315506_key -iv $encrypted_19ac19315506_iv
+    -in secrets.tar.enc -out secrets.tar -d
+  - tar xvf secrets.tar
 script:
 - phpunit
+- mv key_file res/code/key_file
+- mv secret.yaml res/code/secret.yaml
 - build.sh
 deploy:
   provider: gae
   keyfile: key_file
   project: learned-surge-247409
+dd:
+

@@ -2,7 +2,15 @@ language: php
 php:
 - 7.2
 sudo: required
+env:
+  global:
+    # Do not prompt for user input when using any SDK methods.
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
+  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
+  - source $HOME/google-cloud-sdk/path.bash.inc
+  - gcloud components update
+  - gcloud version
   - openssl aes-256-cbc -K $encrypted_19ac19315506_key -iv $encrypted_19ac19315506_iv
     -in secrets.tar.enc -out secrets.tar -d
   - tar xvf secrets.tar

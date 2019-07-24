@@ -2,30 +2,30 @@ language: php
 php:
 - 7.1
 sudo: required
-services:
-- docker
-env:
-  global:
-  - DOCKER_DB=database
-  - DOCKER_RABBIT=rabbit
-  - POSTGRES_DB=test_db
-  - POSTGRES_USER=testuser
-  - POSTGRES_PASSWORD=testpassword
-  - POSTGRES_SCHEME=cinema
-  - RABBIT_USER=rabbitmq
-  - RABBIT_PASSWORD=rabbitmq
-  - RABBIT_GUI_PORT=15672
-  - RABBIT_PORT=5672
+#services:
+#- docker
+#env:
+#  global:
+#  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+#  - DOCKER_DB=database
+#  - DOCKER_RABBIT=rabbit
+#  - POSTGRES_DB=test_db
+#  - POSTGRES_USER=testuser
+#  - POSTGRES_PASSWORD=testpassword
+#  - POSTGRES_SCHEME=cinema
+#  - RABBIT_USER=rabbitmq
+#  - RABBIT_PASSWORD=rabbitmq
+#  - RABBIT_GUI_PORT=15672
+#  - RABBIT_PORT=5672
+before_install:
+- openssl aes-256-cbc -K $encrypted_19ac19315506_key -iv $encrypted_19ac19315506_iv
+  -in secret.yaml.enc -out src/code/secret.yaml -d
+- openssl aes-256-cbc -K $encrypted_19ac19315506_key -iv $encrypted_19ac19315506_iv
+  -in key_file.enc -out src/code/key_file -d
 script:
-- phpunit res/code/src/
-#- docker-compose up -d --build
-#- docker ps
-#after_script:
-#- docker-compose down
+- phpunit
+- build.sh
 deploy:
-  provider: heroku
-  app: lenni-api-simple
-  api_key:
-    secure: dewkDAqs8etxe0yOZymIJYB6978WRVGx+YNuYm9jymk8ChbbObylX/+guxH5vEDs33bw4vL2NBBO4CiuGzpgaRnfnFtNtyZ5LB0CDDTmKsOe7LpnoOhHsLZeHWUhSbPv3CoKFTmfboKiekU9Sc+qctlUjSgQnGoqc7D6k3W9KNn1a3TDjphWr9pUAmDDD+ZMFpDaAVD0NEanT1XyxKo0xNy8OC0uex5W4GOh+1hsZy8caQ9dCmhxX4ohMPTZFNeWwNqAikwis+cb/unqTudnJO1aWKwdPQs8b+3+DyhHe9ZYuzDsi5oANy6GePWvnyF8Dzdp9tiS52H07+eRlCEX18aDxUrr+sJ+fgT+wNBPa7vcQ3+TreDQbA773zJ0WjgulhXhS9wFsWewc00C+PKtmZGSHCapMiBhrzVP6sW3kPJet3Bv+W51P6s89h2y2yjr7eZF9EmEqbEYU4eN2rkVVGfQiidvVYYaR1MBPElFBPLbXqpe9Lk3BGr4WM62nHXPJYTrjYQp2JST5uV9cW1SaYYsT62R7epi74LHSLvasVR6aCzX9fDkVzlg7C1Y7blRGdmat3TZWXbg2ABZVftK3R6GrXNYjOY1gO4dAi52jHAZm5MVXzNOmkQMPqOUVZc+TR2KeuDnB58U4rScDRxectab0mup/+GbkDaT3A5KIJ0=
-    on:
-      repo: lenniDespero/simple-api-app
+  provider: gae
+  keyfile: key_file
+  project: learned-surge-247409

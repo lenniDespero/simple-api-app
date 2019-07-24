@@ -1,0 +1,10 @@
+runtime: php72
+includes:
+  - env_variables.yaml
+runtime_config:
+  document_root: .
+  front_controller_file: index.php
+
+handlers:
+  - url: .*
+    script: auto

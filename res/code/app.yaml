@@ -4,7 +4,6 @@ includes:
 runtime_config:
   document_root: .
   front_controller_file: index.php
-
 handlers:
   - url: .*
     script: auto

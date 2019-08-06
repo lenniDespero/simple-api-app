@@ -2,27 +2,30 @@ language: php
 php:
 - 7.2
 sudo: required
-env:
-  global:
+#env:
+#  global:
     # Do not prompt for user input when using any SDK methods.
-    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+#    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
-  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
-  - source $HOME/google-cloud-sdk/path.bash.inc
-  - gcloud components update
-  - gcloud version
-  - openssl aes-256-cbc -K $encrypted_19ac19315506_key -iv $encrypted_19ac19315506_iv
-    -in secrets.tar.enc -out secrets.tar -d
-  - tar xvf secrets.tar
+#  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf "$HOME/google-cloud-sdk"; curl https://sdk.cloud.google.com | bash > /dev/null; fi
+#  - source $HOME/google-cloud-sdk/path.bash.inc
+#  - gcloud components update
+#  - gcloud version
+#  - openssl aes-256-cbc -K $encrypted_19ac19315506_key -iv $encrypted_19ac19315506_iv
+#    -in secrets.tar.enc -out secrets.tar -d
+#  - tar xvf secrets.tar
+before_script:
+  - composer install --no-interaction
 script:
-- phpunit res/code
-- mv key_file res/code/key_file
-- mv secret.yaml res/code/secret.yaml
-before_deploy:
-  - cd res/code
-deploy:
-  skip_cleanup: true
-  provider: gae
-  keyfile: key_file
-  project: learned-surge-247409
+- phpunit res/code/tests --bootstrap vendor/autoload.php
+
+#- mv key_file res/code/key_file
+#- mv secret.yaml res/code/secret.yaml
+#before_deploy:
+#  - cd res/code
+#deploy:
+#  skip_cleanup: true
+#  provider: gae
+#  keyfile: key_file
+#  project: learned-surge-247409
 

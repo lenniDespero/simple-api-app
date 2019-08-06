@@ -15,9 +15,10 @@ before_install:
 #    -in secrets.tar.enc -out secrets.tar -d
 #  - tar xvf secrets.tar
 before_script:
+  - cd res/code/
   - composer install --no-interaction
 script:
-- phpunit res/code/tests --bootstrap vendor/autoload.php
+- phpunit tests --bootstrap vendor/autoload.php
 
 #- mv key_file res/code/key_file
 #- mv secret.yaml res/code/secret.yaml
